@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunga Dadap Merah (Erythrina crista-galli) </i>| Informasi Lengkap</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header dan Navigasi */
+        header {
+            background-color: #c62828;
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover i {
+            transform: rotate(15deg) scale(1.2);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .logo p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-top: -5px;
+        }
+        
+        nav {
+            display: flex;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.2);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        nav ul li a:hover::before {
+            left: 0;
+        }
+        
+        nav ul li a:hover {
+            color: #ffccbc;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ffccbc;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erythrina_crista-galli_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen_in_Naturgetreuen_Abbildungen_mit_kurz_erl%C3%A4uterndem_Texte._Band_I._1897.jpg/1200px-Erythrina_crista-galli_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen_in_Naturgetreuen_Abbildungen_mit_kurz_erl%C3%A4uterndem_Texte._Band_I._1897.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: #ffccbc;
+            animation: expandWidth 1.5s ease 1s forwards;
+        }
+        
+        @keyframes expandWidth {
+            to {
+                width: 80%;
+            }
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #c62828;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #c62828;
+            animation: fadeInUp 1s ease 0.6s;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 0;
+        }
+        
+        .btn:hover {
+            color: #c62828;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 5%;
+            animation-delay: 1s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .floating-element:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 60%;
+            right: 5%;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .section-title.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #c62828;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: #c62828;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #666;
+        }
+        
+        /* Description Section */
+        .description-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .description-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            position: relative;
+        }
+        
+        .description-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .description-card:nth-child(1) { transition-delay: 0.1s; }
+        .description-card:nth-child(2) { transition-delay: 0.2s; }
+        .description-card:nth-child(3) { transition-delay: 0.3s; }
+        .description-card:nth-child(4) { transition-delay: 0.4s; }
+        .description-card:nth-child(5) { transition-delay: 0.5s; }
+        
+        .description-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background-color: #c62828;
+            transition: height 0.5s ease;
+        }
+        
+        .description-card:hover::before {
+            height: 100%;
+        }
+        
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.7));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .description-card:hover .card-image::after {
+            opacity: 1;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .description-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content h3 {
+            color: #c62828;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .card-content h3 i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .description-card:hover .card-content h3 i {
+            transform: scale(1.2) rotate(15deg);
+        }
+        
+        .card-content p {
+            color: #555;
+            text-align: justify;
+        }
+        
+        .card-icon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: #c62828;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(198, 40, 40, 0.3);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+        
+        .description-card:hover .card-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Taxonomy Section */
+        .taxonomy-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .taxonomy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .taxonomy-table th, .taxonomy-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .taxonomy-table th {
+            background-color: #f8d7da;
+            color: #c62828;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .taxonomy-table tr {
+            transition: background-color 0.3s ease;
+        }
+        
+        .taxonomy-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .taxonomy-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .authority {
+            font-style: italic;
+            color: #666;
+        }
+        
+        /* Distribution Section */
+        .distribution-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .distribution-content.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s ease 0.3s;
+        }
+        
+        #map.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .map-info {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+        }
+        
+        .distribution-lists {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .distribution-list {
+            flex: 1;
+            min-width: 300px;
+            margin: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .distribution-list.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .distribution-list::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .distribution-list:nth-child(1)::before {
+            background-color: #4CAF50;
+        }
+        
+        .distribution-list:nth-child(2)::before {
+            background-color: #9C27B0;
+        }
+        
+        .distribution-list h3 {
+            color: #c62828;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .distribution-list h3 i {
+            margin-right: 8px;
+        }
+        
+        .distribution-list ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .distribution-list ul li {
+            margin-bottom: 5px;
+            color: #555;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .distribution-list ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .distribution-list.animate ul li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .distribution-list.animate ul li:nth-child(1) { transition-delay: 0.1s; }
+        .distribution-list.animate ul li:nth-child(2) { transition-delay: 0.2s; }
+        .distribution-list.animate ul li:nth-child(3) { transition-delay: 0.3s; }
+        .distribution-list.animate ul li:nth-child(4) { transition-delay: 0.4s; }
+        .distribution-list.animate ul li:nth-child(5) { transition-delay: 0.5s; }
+        .distribution-list.animate ul li:nth-child(6) { transition-delay: 0.6s; }
+        .distribution-list.animate ul li:nth-child(7) { transition-delay: 0.7s; }
+        .distribution-list.animate ul li:nth-child(8) { transition-delay: 0.8s; }
+        
+        /* Gallery Section */
+        .gallery {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .gallery.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .gallery-category {
+            margin: 0 10px 10px;
+            padding: 8px 20px;
+            background-color: #f1f1f1;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #c62828;
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+        
+        .gallery-category:hover::before {
+            width: 100%;
+        }
+        
+        .gallery-category:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-category.active {
+            background-color: #c62828;
+            color: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        
+        .gallery-item.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.7));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.9);
+            text-align: center;
+            font-weight: 500;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .gallery-zoom {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c62828;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            z-index: 3;
+        }
+        
+        .gallery-item:hover .gallery-zoom {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80%;
+            border: 5px solid white;
+            border-radius: 5px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+        
+        .lightbox.show .lightbox-content {
+            transform: scale(1);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            transform: rotate(90deg) scale(1.2);
+            color: #ffccbc;
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            padding: 0 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-nav button {
+            background-color: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-nav button:hover {
+            background-color: rgba(255,255,255,0.4);
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #c62828;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ffccbc, #c62828, #ffccbc);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .footer-section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #ffccbc;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffccbc;
+            transition: width 0.5s ease;
+        }
+        
+        .footer-section:hover h3::after {
+            width: 50px;
+        }
+        
+        .footer-section p, .footer-section li {
+            margin-bottom: 10px;
+            color: #ffccbc;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li a {
+            color: #ffccbc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #ffccbc;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .footer-section ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+        
+        .social-icons a:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .social-icons a:hover {
+            background-color: #ffccbc;
+            color: #c62828;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #ffccbc, #c62828);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #c62828;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #ffccbc;
+            color: #c62828;
+            transform: translateY(-5px);
+        }
+        
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #c62828;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.3rem;
+            }
+            
+            .description-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: #c62828;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 100;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .description-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            #map {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            
+            .gallery-item img {
+                height: 150px;
+            }
+            
+            .gallery-caption {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            #map {
+                height: 300px;
+            }
+            
+            .distribution-lists {
+                flex-direction: column;
+            }
+            
+            .distribution-list {
+                margin: 0 0 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader">
+        <div class="loader-circle"></div>
+    </div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header dan Navigasi -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <div>
+                    <h1>Dadap Merah</h1>
+                    <p>Erythrina crista-galli</p>
+                </div>
+            </div>
+            <nav>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#description">Deskripsi</a></li>
+                    <li><a href="#taxonomy">Taksonomi</a></li>
+                    <li><a href="#distribution">Persebaran</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="hero-content">
+            <h1>Bunga Dadap Merah</h1>
+            <p>Keindahan Alam dari Amerika Selatan</p>
+            <a href="#description" class="btn">Jelajahi Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section id="description" class="container">
+        <div class="section-title">
+            <h2>Deskripsi Tanaman</h2>
+            <p>Pelajari lebih lanjut tentang karakteristik unik Bunga Dadap Merah</p>
+        </div>
+        
+        <div class="description-grid">
+            <div class="description-card">
+                <div class="card-image">
+                    <img src="https://tamandigital.faperta.unand.ac.id/images/joomlart/tanaman/hias/pucuk%20merah/akar.jpg" alt="Akar Dadap Merah">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-seedling"></i> Akar</h3>
+                    <p>Tanaman Dadap Merah memiliki sistem perakaran yang kuat dengan akar tunggang yang dapat tumbuh cukup dalam ke dalam tanah. Akar sampingnya menyebar luas membantu tanaman menyerap nutrisi dan air secara efisien. Akarnya juga memiliki kemampuan untuk memperbaiki nitrogen dari udara melalui simbiosis dengan bakteri Rhizobium, yang membuat tanaman ini penting untuk kesuburan tanah.</p>
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+            </div>
+            
+            <div class="description-card">
+                <div class="card-image">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/565481581/large.jpg" alt="Perawakan Dadap Merah">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-tree"></i> Perwakan</h3>
+                    <p>Dadap Merah merupakan pohon kecil atau perdu yang dapat tumbuh mencapai tinggi 5-10 meter. Tanaman ini memiliki tajuk yang menyebar dengan ranting-ranting yang banyak dan biasanya berduri. Bentuk keseluruhan tanaman terlihat menarik terutama saat musim berbunga, di mana ujung-ujung cabangnya dipenuhi dengan bunga berwarna merah mencolok. Tanaman ini sering ditanam sebagai tanaman hias di taman dan jalan karena keindahan bunganya.</p>
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-tree"></i>
+                </div>
+            </div>
+            
+            <div class="description-card">
+                <div class="card-image">
+                    <img src="https://static.inaturalist.org/photos/568089515/large.jpg" alt="Batang Dadap Merah">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-grip-lines-vertical"></i> Batang</h3>
+                    <p>Batang Dadap Merah berkayu, keras, dan umumnya berduri. Warna batangnya cokelat keabu-abuan dengan permukaan yang kasar. Duri-duri yang terdapat pada batang dan cabang berfungsi sebagai mekanisme pertahanan alami terhadap herbivora. Batangnya cukup kuat namun dapat patah saat terkena angin kencang. Kayu dari tanaman ini relatif lunak dan ringan.</p>
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-grip-lines-vertical"></i>
+                </div>
+            </div>
+            
+            <div class="description-card">
+                <div class="card-image">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/565487688/large.jpg" alt="Daun Dadap Merah">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-leaf"></i> Daun</h3>
+                    <p>Daun Dadap Merah merupakan daun majemuk beranak daun tiga (trifoliate). Setiap anak daun berbentuk oval dengan ujung meruncing, tepi daun rata, dan panjangnya sekitar 5-15 cm. Daun berwarna hijau mengkilap di bagian atas dan lebih pucat di bagian bawah. Daun muda biasanya berwarna kemerahan dan akan berubah menjadi hijau saat dewasa. Daun ini bersifat gugur dan akan rontok saat musim kering.</p>
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+            </div>
+            
+            <div class="description-card">
+                <div class="card-image">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/571339187/large.jpg" alt="Bunga Dadap Merah">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-spa"></i> Bunga</h3>
+                    <p>Bunga Dadap Merah memiliki ciri khas yang sangat mencolok dengan warna merah cerah. Bentuk bunganya unik seperti jengger ayam (karena itu disebut crista-galli yang berarti "jengger ayam" dalam bahasa Latin). Bunga tersusun dalam tandan yang panjang dan muncul di ujung cabang, biasanya sebelum daun muncul. Setiap bunga memiliki kelopak bunga yang memanjang dan mahkota bunga yang tidak simetris. Bunga ini merupakan sumber nektar yang penting bagi burung kolibri dan serangga penyerbuk.</p>
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Taxonomy Section -->
+    <section id="taxonomy" class="container">
+        <div class="section-title">
+            <h2>Klasifikasi Taksonomi</h2>
+            <p>Struktur klasifikasi ilmiah Bunga Dadap Merah menurut Tropicos</p>
+        </div>
+        
+        <div class="taxonomy-section">
+            <table class="taxonomy-table">
+                <tr>
+                    <th>Rank</th>
+                    <th>Scientific Name</th>
+                    <th>Author</th>
+                </tr>
+                <tr>
+                    <td>Kingdom</td>
+                    <td>Plantae</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Subkingdom</td>
+                    <td>Tracheobionta</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Superdivision</td>
+                    <td>Spermatophyta</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Division</td>
+                    <td>Magnoliophyta</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Class</td>
+                    <td>Magnoliopsida</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Subclass</td>
+                    <td>Rosidae</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Order</td>
+                    <td>Fabales</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Family</td>
+                    <td>Fabaceae</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Subfamily</td>
+                    <td>Faboideae</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Genus</td>
+                    <td><i>Erythrina</i></td>
+                    <td class="authority">L.</td>
+                </tr>
+                <tr>
+                    <td>Species</td>
+                    <td><i>Erythrina crista-galli</i></td>
+                    <td class="authority">L.</td>
+                </tr>
+            </table>
+            
+            <div class="taxonomy-notes">
+                <h3>Catatan Taksonomi</h3>
+                <p>Klasifikasi di atas mengikuti standar yang digunakan oleh Tropicos, database botani yang dikelola oleh Missouri Botanical Garden. Nama spesies <i>Erythrina crista-galli</i> pertama kali dideskripsikan secara formal oleh Carl Linnaeus (L.) dalam karyanya. Tanaman ini juga dikenal dengan beberapa sinonim termasuk <i>Erythrina fasciculata</i> Benth. dan <i>Erythrina laurifolia</i> Jacq.</p>
+                <p>Nama "crista-galli" berasal dari bahasa Latin yang berarti "jengger ayam", merujuk pada bentuk bunganya yang khas menyerupai jengger ayam jantan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Distribution Section -->
+    <section id="distribution" class="container">
+        <div class="section-title">
+            <h2>Peta Persebaran</h2>
+            <p>Distribusi geografis Bunga Dadap Merah di seluruh dunia</p>
+        </div>
+        
+        <div class="distribution-content">
+            <div id="map"></div>
+            <div class="map-info">Peta persebaran asli Erythrina crista-galli berdasarkan data dari Plants of the World Online (POWO). Area hijau menunjukkan wilayah asli, sementara area ungu menunjukkan wilayah di mana tanaman ini telah diperkenalkan.</div>
+            
+            <div class="distribution-lists">
+                <div class="distribution-list">
+                    <h3><i class="fas fa-map-marker-alt"></i> Asli (Native)</h3>
+                    <ul>
+                        <li>Argentina Northeast</li>
+                        <li>Argentina Northwest</li>
+                        <li>Brazil Northeast</li>
+                        <li>Brazil South</li>
+                        <li>Brazil Southeast</li>
+                        <li>Brazil West-Central</li>
+                        <li>Paraguay</li>
+                        <li>Uruguay</li>
+                    </ul>
+                </div>
+                
+                <div class="distribution-list">
+                    <h3><i class="fas fa-globe-americas"></i> Diperkenalkan (Introduced)</h3>
+                    <ul>
+                        <li>Bolivia</li>
+                        <li>Cuba</li>
+                        <li>Dominican Republic</li>
+                        <li>Egypt</li>
+                        <li>Eswatini</li>
+                        <li>Ethiopia</li>
+                        <li>Hawaii</li>
+                        <li>India</li>
+                        <li>Jawa</li>
+                        <li>Kenya</li>
+                        <li>Leeward Is.</li>
+                        <li>Madeira</li>
+                        <li>Mozambique</li>
+                        <li>Nepal</li>
+                        <li>New Guinea</li>
+                        <li>New South Wales</li>
+                        <li>New Zealand North</li>
+                        <li>New Zealand South</li>
+                        <li>Northern Provinces</li>
+                        <li>Peru</li>
+                        <li>Puerto Rico</li>
+                        <li>Queensland</li>
+                        <li>Rwanda</li>
+                        <li>Society Is.</li>
+                        <li>Sudan-South Sudan</li>
+                        <li>Tanzania</li>
+                        <li>Trinidad-Tobago</li>
+                        <li>Uganda</li>
+                        <li>Windward Is.</li>
+                        <li>Zimbabwe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="container">
+        <div class="section-title">
+            <h2>Galeri</h2>
+            <p>Koleksi foto Bunga Dadap Merah dari berbagai sudut</p>
+        </div>
+        
+        <div class="gallery">
+            <div class="gallery-categories">
+                <div class="gallery-category active" data-category="all">Semua</div>
+                <div class="gallery-category" data-category="flower">Bunga</div>
+                <div class="gallery-category" data-category="leaf">Daun</div>
+                <div class="gallery-category" data-category="tree">Pohon</div>
+                <div class="gallery-category" data-category="fruit">Buah</div>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="flower" data-src="https://inaturalist-open-data.s3.amazonaws.com/photos/568450743/large.jpg">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/568450743/large.jpg" alt="Bunga Dadap Merah">
+                    <div class="gallery-caption">Bunga Dadap Merah</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="flower" data-src="https://inaturalist-open-data.s3.amazonaws.com/photos/590489618/large.jpg">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/590489618/large.jpg" alt="Tandan Bunga">
+                    <div class="gallery-caption">Tandan Bunga</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="leaf" data-src="https://inaturalist-open-data.s3.amazonaws.com/photos/581017303/large.jpg">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/581017303/large.jpg" alt="Bunga dan Daun">
+                    <div class="gallery-caption">Bunga dan Daun</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="tree" data-src="https://inaturalist-open-data.s3.amazonaws.com/photos/591155057/large.jpg">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/591155057/large.jpg" alt="Pohon Dadap Merah">
+                    <div class="gallery-caption">Pohon Dadap Merah</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="flower" data-src="https://static.inaturalist.org/photos/588178761/large.jpg">
+                    <img src="https://static.inaturalist.org/photos/588178761/large.jpg" alt="Detail Bunga">
+                    <div class="gallery-caption">Detail Bunga</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="fruit" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6A-rFyfCG6qlG53wj2-n95Pua7HSLPGgRab5ZtMseLjNyhyphenhyphenFzxBx72bZbmE2PsyoNv3DFSwh_k5vPYBnP4yo-5Ahl8vX4qHvoQ6a9DfRcdT6Z79QXNLCT3f7_l9QSIUQ4I6ZEapwq5s4/w323-h400/1602745613937235-2.png">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6A-rFyfCG6qlG53wj2-n95Pua7HSLPGgRab5ZtMseLjNyhyphenhyphenFzxBx72bZbmE2PsyoNv3DFSwh_k5vPYBnP4yo-5Ahl8vX4qHvoQ6a9DfRcdT6Z79QXNLCT3f7_l9QSIUQ4I6ZEapwq5s4/w323-h400/1602745613937235-2.png" alt="Buah Dadap Merah">
+                    <div class="gallery-caption">Buah Dadap Merah</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="flower" data-src="https://inaturalist-open-data.s3.amazonaws.com/photos/587947831/large.jpg">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/587947831/large.jpg" alt="Bunga Dekat">
+                    <div class="gallery-caption">Bunga Dekat</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="leaf" data-src="https://inaturalist-open-data.s3.amazonaws.com/photos/588320977/large.jpg">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/588320977/large.jpg" alt="Daun Dadap Merah">
+                    <div class="gallery-caption">Daun Dadap Merah</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="tree" data-src="https://inaturalist-open-data.s3.amazonaws.com/photos/588320971/large.jpg">
+                    <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/588320971/large.jpg" alt="Cabang Dadap Merah">
+                    <div class="gallery-caption">Cabang Dadap Merah</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="flower" data-src="https://64.media.tumblr.com/a3b9b1619c2ccb903d66cb6a6ce1fb65/5ed800483e156711-9b/s540x810/42bb030dcee8e204cdea612bab0cea651d415c4e.jpg">
+                    <img src="https://64.media.tumblr.com/a3b9b1619c2ccb903d66cb6a6ce1fb65/5ed800483e156711-9b/s540x810/42bb030dcee8e204cdea612bab0cea651d415c4e.jpg" alt="Bakal Buah Dadap Merah">
+                    <div class="gallery-caption">Bakal Buah Dadap Merah</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="fruit" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpvmRZRCNB8ZciAeHpFVsOgZGrczgJPYYpm-y5FkJbrkS_37IGP__cNqU7xyEeE_Nwg29etpv-0X514oLGS3kOmdgRxSMa7DSFJzIcza-vEt3KW-TNIvxFJ3DYSB1l98pGDMGpNAYHzEM/w400-h281/1602745609542573-3.png">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpvmRZRCNB8ZciAeHpFVsOgZGrczgJPYYpm-y5FkJbrkS_37IGP__cNqU7xyEeE_Nwg29etpv-0X514oLGS3kOmdgRxSMa7DSFJzIcza-vEt3KW-TNIvxFJ3DYSB1l98pGDMGpNAYHzEM/w400-h281/1602745609542573-3.png" alt="Polong Buah">
+                    <div class="gallery-caption">Polong Buah</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="tree" data-src="https://static.inaturalist.org/photos/591201539/original.jpg">
+                    <img src="https://static.inaturalist.org/photos/591201539/original.jpg" alt="Pohon Muda">
+                    <div class="gallery-caption">Pohon Muda</div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Kami</h3>
+                <p>Website ini didedikasikan untuk menyediakan informasi lengkap tentang Bunga Dadap Merah (Erythrina crista-galli) dan berbagai aspek terkait tanaman ini.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Menu Cepat</h3>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#description">Deskripsi</a></li>
+                    <li><a href="#taxonomy">Taksonomi</a></li>
+                    <li><a href="#distribution">Persebaran</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kontak</h3>
+                <p><i class="fas fa-map-marker-alt"></i>  Jurusan Biologi Kampus Universitas Negeri Surabaya
+ Jl. Ketintang
+Pratama V, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231</p>
+                <p><i class="fas fa-phone"></i> +62 858 9567 6458</p>
+                <p><i class="fas fa-envelope"></i> 24030244132@mhs.unesa.ac.id</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Informasi Tentang Bunga Dadap Merah. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <div class="lightbox-nav">
+            <button id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+            <button id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Hide loader when page is loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('hidden');
+            }, 500);
+        });
+        
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul');
+        
+        menuToggle.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                navUl.classList.remove('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Inisialisasi Peta
+        var map = L.map('map').setView([-15, -55], 3);
+        
+        // Tambahkan tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Data area persebaran berdasarkan POWO
+        // Area asli (Native)
+        var nativeAreas = [
+            {
+                name: "Argentina Northeast",
+                coords: [[-26.8083, -54.1667], [-24.1833, -56.1667], [-25.8083, -54.1667], [-26.8083, -56.1667]]
+            },
+            {
+                name: "Argentina Northwest",
+                coords: [[-24.1833, -65.3333], [-22.1833, -67.3333], [-24.1833, -67.3333], [-24.1833, -65.3333]]
+            },
+            {
+                name: "Brazil Northeast",
+                coords: [[-5.4984, -39.3206], [-3.4984, -41.3206], [-5.4984, -41.3206], [-5.4984, -39.3206]]
+            },
+            {
+                name: "Brazil South",
+                coords: [[-27.5969, -48.5495], [-25.5969, -50.5495], [-27.5969, -50.5495], [-27.5969, -48.5495]]
+            },
+            {
+                name: "Brazil Southeast",
+                coords: [[-22.9068, -43.1729], [-20.9068, -45.1729], [-22.9068, -45.1729], [-22.9068, -43.1729]]
+            },
+            {
+                name: "Brazil West-Central",
+                coords: [[-15.7801, -47.9292], [-13.7801, -49.9292], [-15.7801, -49.9292], [-15.7801, -47.9292]]
+            },
+            {
+                name: "Paraguay",
+                coords: [[-23.4425, -58.4438], [-21.4425, -60.4438], [-23.4425, -60.4438], [-23.4425, -58.4438]]
+            },
+            {
+                name: "Uruguay",
+                coords: [[-32.5228, -55.7658], [-30.5228, -57.7658], [-32.5228, -57.7658], [-32.5228, -55.7658]]
+            }
+        ];
+        
+        // Area diperkenalkan (Introduced)
+        var introducedAreas = [
+            {
+                name: "Bolivia",
+                coords: [[-16.2902, -63.5887], [-14.2902, -65.5887], [-16.2902, -65.5887], [-16.2902, -63.5887]]
+            },
+            {
+                name: "Cuba",
+                coords: [[21.5218, -77.7812], [23.5218, -79.7812], [21.5218, -79.7812], [21.5218, -77.7812]]
+            },
+            {
+                name: "Dominican Republic",
+                coords: [[18.7357, -70.1627], [20.7357, -72.1627], [18.7357, -72.1627], [18.7357, -70.1627]]
+            },
+            {
+                name: "Egypt",
+                coords: [[26.8206, 30.8025], [28.8206, 28.8025], [26.8206, 28.8025], [26.8206, 30.8025]]
+            },
+            {
+                name: "Eswatini",
+                coords: [[-26.5225, 31.4659], [-24.5225, 33.4659], [-26.5225, 33.4659], [-26.5225, 31.4659]]
+            },
+            {
+                name: "Ethiopia",
+                coords: [[9.1450, 40.4897], [11.1450, 38.4897], [9.1450, 38.4897], [9.1450, 40.4897]]
+            },
+            {
+                name: "Hawaii",
+                coords: [[19.8968, -155.5828], [21.8968, -157.5828], [19.8968, -157.5828], [19.8968, -155.5828]]
+            },
+            {
+                name: "India",
+                coords: [[20.5937, 78.9629], [22.5937, 76.9629], [20.5937, 76.9629], [20.5937, 78.9629]]
+            },
+            {
+                name: "Jawa",
+                coords: [[-7.4952, 110.2193], [-5.4952, 112.2193], [-7.4952, 112.2193], [-7.4952, 110.2193]]
+            },
+            {
+                name: "Kenya",
+                coords: [[-0.0236, 37.9062], [1.9764, 35.9062], [-0.0236, 35.9062], [-0.0236, 37.9062]]
+            },
+            {
+                name: "Leeward Is.",
+                coords: [[17.3616, -62.7830], [19.3616, -64.7830], [17.3616, -64.7830], [17.3616, -62.7830]]
+            },
+            {
+                name: "Madeira",
+                coords: [[32.7607, -16.9595], [34.7607, -18.9595], [32.7607, -18.9595], [32.7607, -16.9595]]
+            },
+            {
+                name: "Mozambique",
+                coords: [[-18.6657, 35.5296], [-16.6657, 33.5296], [-18.6657, 33.5296], [-18.6657, 35.5296]]
+            },
+            {
+                name: "Nepal",
+                coords: [[28.3949, 84.1240], [30.3949, 82.1240], [28.3949, 82.1240], [28.3949, 84.1240]]
+            },
+            {
+                name: "New Guinea",
+                coords: [[-5.6816, 144.2489], [-3.6816, 146.2489], [-5.6816, 146.2489], [-5.6816, 144.2489]]
+            },
+            {
+                name: "New South Wales",
+                coords: [[-31.2532, 146.9211], [-29.2532, 148.9211], [-31.2532, 148.9211], [-31.2532, 146.9211]]
+            },
+            {
+                name: "New Zealand North",
+                coords: [[-38.6809, 175.7817], [-36.6809, 177.7817], [-38.6809, 177.7817], [-38.6809, 175.7817]]
+            },
+            {
+                name: "New Zealand South",
+                coords: [[-44.4984, 168.7231], [-42.4984, 170.7231], [-44.4984, 170.7231], [-44.4984, 168.7231]]
+            },
+            {
+                name: "Northern Provinces",
+                coords: [[-24.0155, 30.9833], [-22.0155, 28.9833], [-24.0155, 28.9833], [-24.0155, 30.9833]]
+            },
+            {
+                name: "Peru",
+                coords: [[-9.1900, -75.0152], [-7.1900, -77.0152], [-9.1900, -77.0152], [-9.1900, -75.0152]]
+            },
+            {
+                name: "Puerto Rico",
+                coords: [[18.2208, -66.5901], [20.2208, -68.5901], [18.2208, -68.5901], [18.2208, -66.5901]]
+            },
+            {
+                name: "Queensland",
+                coords: [[-22.1646, 144.8481], [-20.1646, 146.8481], [-22.1646, 146.8481], [-22.1646, 144.8481]]
+            },
+            {
+                name: "Rwanda",
+                coords: [[-1.9403, 29.8739], [0.0597, 27.8739], [-1.9403, 27.8739], [-1.9403, 29.8739]]
+            },
+            {
+                name: "Society Is.",
+                coords: [[-17.6797, -149.4068], [-15.6797, -151.4068], [-17.6797, -151.4068], [-17.6797, -149.4068]]
+            },
+            {
+                name: "Sudan-South Sudan",
+                coords: [[12.8628, 30.2176], [14.8628, 28.2176], [12.8628, 28.2176], [12.8628, 30.2176]]
+            },
+            {
+                name: "Tanzania",
+                coords: [[-6.3690, 34.8888], [-4.3690, 32.8888], [-6.3690, 32.8888], [-6.3690, 34.8888]]
+            },
+            {
+                name: "Trinidad-Tobago",
+                coords: [[10.6918, -61.2225], [12.6918, -63.2225], [10.6918, -63.2225], [10.6918, -61.2225]]
+            },
+            {
+                name: "Uganda",
+                coords: [[1.3733, 32.2903], [3.3733, 30.2903], [1.3733, 30.2903], [1.3733, 32.2903]]
+            },
+            {
+                name: "Windward Is.",
+                coords: [[13.9094, -60.9789], [15.9094, -62.9789], [13.9094, -62.9789], [13.9094, -60.9789]]
+            },
+            {
+                name: "Zimbabwe",
+                coords: [[-19.0154, 29.1549], [-17.0154, 27.1549], [-19.0154, 27.1549], [-19.0154, 29.1549]]
+            }
+        ];
+        
+        // Tambahkan area untuk lokasi asli
+        nativeAreas.forEach(function(area) {
+            var polygon = L.polygon(area.coords, {
+                color: "#4CAF50",
+                fillColor: "#4CAF50",
+                fillOpacity: 0.3,
+                weight: 2
+            }).addTo(map);
+            
+            polygon.bindPopup("<b>" + area.name + "</b><br>Status: Asli");
+        });
+        
+        // Tambahkan area untuk lokasi diperkenalkan
+        introducedAreas.forEach(function(area) {
+            var polygon = L.polygon(area.coords, {
+                color: "#9C27B0",
+                fillColor: "#9C27B0",
+                fillOpacity: 0.3,
+                weight: 2
+            }).addTo(map);
+            
+            polygon.bindPopup("<b>" + area.name + "</b><br>Status: Diperkenalkan");
+        });
+        
+        // Tambahkan legenda
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'info legend');
+            div.style.backgroundColor = 'white';
+            div.style.padding = '10px';
+            div.style.borderRadius = '5px';
+            div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
+            
+            div.innerHTML = '<h4 style="margin: 0 0 5px 0;">Legenda</h4>';
+            div.innerHTML += '<i style="background: #4CAF50; width: 12px; height: 12px; display: inline-block; margin-right: 5px; border-radius: 50%;"></i> Asli<br>';
+            div.innerHTML += '<i style="background: #9C27B0; width: 12px; height: 12px; display: inline-block; margin-right: 5px; border-radius: 50%;"></i> Diperkenalkan';
+            
+            return div;
+        };
+        legend.addTo(map);
+        
+        // Gallery Filter
+        const galleryCategories = document.querySelectorAll('.gallery-category');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        galleryCategories.forEach(category => {
+            category.addEventListener('click', () => {
+                // Remove active class from all categories
+                galleryCategories.forEach(cat => cat.classList.remove('active'));
+                // Add active class to clicked category
+                category.classList.add('active');
+                
+                const filterValue = category.getAttribute('data-category');
+                
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.classList.add('animate');
+                        }, 100);
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('animate');
+                    }
+                });
+            });
+        });
+        
+        // Lightbox Gallery
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        
+        let currentImageIndex = 0;
+        const visibleGalleryItems = [];
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.getAttribute('data-src');
+                const caption = item.querySelector('.gallery-caption').textContent;
+                
+                // Get all visible items
+                visibleGalleryItems.length = 0;
+                galleryItems.forEach(item => {
+                    if (item.style.display !== 'none') {
+                        visibleGalleryItems.push(item);
+                    }
+                });
+                
+                // Find current index
+                currentImageIndex = visibleGalleryItems.indexOf(item);
+                
+                lightboxImg.setAttribute('src', imgSrc);
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('show');
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('show');
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('show');
+            }
+        });
+        
+        // Navigation in lightbox
+        lightboxPrev.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + visibleGalleryItems.length) % visibleGalleryItems.length;
+            updateLightboxImage();
+        });
+        
+        lightboxNext.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % visibleGalleryItems.length;
+            updateLightboxImage();
+        });
+        
+        function updateLightboxImage() {
+            const item = visibleGalleryItems[currentImageIndex];
+            const imgSrc = item.getAttribute('data-src');
+            const caption = item.querySelector('.gallery-caption').textContent;
+            
+            lightboxImg.setAttribute('src', imgSrc);
+            lightboxCaption.textContent = caption;
+        }
+        
+        // Keyboard navigation in lightbox
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('show')) {
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('show');
+                } else if (e.key === 'ArrowLeft') {
+                    currentImageIndex = (currentImageIndex - 1 + visibleGalleryItems.length) % visibleGalleryItems.length;
+                    updateLightboxImage();
+                } else if (e.key === 'ArrowRight') {
+                    currentImageIndex = (currentImageIndex + 1) % visibleGalleryItems.length;
+                    updateLightboxImage();
+                }
+            }
+        });
+        
+        // Animasi saat scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Animasi khusus untuk galeri
+                    if (entry.target.classList.contains('gallery-grid')) {
+                        const items = entry.target.querySelectorAll('.gallery-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('animate');
+                            }, index * 100);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // Elemen yang akan diamati
+        const elementsToAnimate = document.querySelectorAll('.section-title, .description-card, .distribution-content, .gallery, .footer-section');
+        
+        elementsToAnimate.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Animasi khusus untuk peta
+        const mapElement = document.getElementById('map');
+        const mapObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        mapObserver.observe(mapElement);
+        
+        // Animasi khusus untuk distribution-list
+        const distributionLists = document.querySelectorAll('.distribution-list');
+        distributionLists.forEach(list => {
+            const listObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+            
+            listObserver.observe(list);
+        });
+        
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const heroSection = document.querySelector('.hero');
+            heroSection.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+    </script>
+</body>
+</html>
