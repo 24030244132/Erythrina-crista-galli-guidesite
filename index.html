@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bunga Dadap Merah (Erythrina crista-galli) </i>| Informasi Lengkap</title>
+    <title>Bunga Dadap Merah (Erythrina crista-galli) | Informasi Lengkap</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -523,6 +523,166 @@
         
         .authority {
             font-style: italic;
+            color: #666;
+        }
+        
+        /* Conservation Status */
+        .conservation-status {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .conservation-status h3 {
+            color: #c62828;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .conservation-status h3 i {
+            margin-right: 10px;
+        }
+        
+        .status-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .status-badge {
+            flex: 0 0 auto;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .status-badge:hover {
+            transform: translateY(-5px);
+        }
+        
+        .status-badge.lc {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .status-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .status-code {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .status-details {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .status-details p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .status-details strong {
+            color: #c62828;
+        }
+        
+        .status-criteria {
+            margin-bottom: 15px;
+        }
+        
+        .status-criteria h4 {
+            color: #c62828;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .status-criteria ul {
+            padding-left: 20px;
+        }
+        
+        .status-criteria li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .status-reference {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .iucn-categories {
+            margin-top: 20px;
+        }
+        
+        .iucn-categories h4 {
+            color: #c62828;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .category-item.active {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .category-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .category-item.ex .category-color { background-color: #9E1B32; }
+        .category-item.ew .category-color { background-color: #FF6A00; }
+        .category-item.cr .category-color { background-color: #B30000; }
+        .category-item.en .category-color { background-color: #E30000; }
+        .category-item.vu .category-color { background-color: #FF9E00; }
+        .category-item.nt .category-color { background-color: #FFCC00; }
+        .category-item.lc .category-color { background-color: #4CAF50; }
+        
+        .category-info {
+            flex: 1;
+        }
+        
+        .category-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .category-desc {
+            font-size: 0.8rem;
             color: #666;
         }
         
@@ -1334,6 +1494,14 @@
             .distribution-list {
                 margin: 0 0 20px 0;
             }
+            
+            .status-container {
+                flex-direction: column;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1390,7 +1558,7 @@
         </div>
     </section>
 
-    <!-- Description Section -->
+   <!-- Description Section -->
     <section id="description" class="container">
         <div class="section-title">
             <h2>Deskripsi Tanaman</h2>
@@ -1535,11 +1703,91 @@
                     <td class="authority">L.</td>
                 </tr>
             </table>
-            
             <div class="taxonomy-notes">
                 <h3>Catatan Taksonomi</h3>
                 <p>Klasifikasi di atas mengikuti standar yang digunakan oleh Tropicos, database botani yang dikelola oleh Missouri Botanical Garden. Nama spesies <i>Erythrina crista-galli</i> pertama kali dideskripsikan secara formal oleh Carl Linnaeus (L.) dalam karyanya. Tanaman ini juga dikenal dengan beberapa sinonim termasuk <i>Erythrina fasciculata</i> Benth. dan <i>Erythrina laurifolia</i> Jacq.</p>
                 <p>Nama "crista-galli" berasal dari bahasa Latin yang berarti "jengger ayam", merujuk pada bentuk bunganya yang khas menyerupai jengger ayam jantan.</p>
+            </div>
+            
+            <div class="conservation-status">
+                <h3><i class="fas fa-shield-alt"></i> Status Konservasi IUCN</h3>
+                <div class="status-container">
+                    <div class="status-badge lc">
+                        <span class="status-text">Least Concern</span>
+                        <span class="status-code">LC</span>
+                    </div>
+                    <div class="status-details">
+                        <p><strong>Erythrina crista-galli</strong> telah dinilai oleh IUCN Red List dan memiliki status <strong>Least Concern (LC)</strong>.</p>
+                        <p>Status ini menunjukkan bahwa spesies ini tidak terancam punah dan memiliki risiko kepunahan yang rendah. Populasi spesies ini stabil dan tersebar luas di habitat aslinya.</p>
+                        <div class="status-criteria">
+                            <h4>Kriteria Penilaian:</h4>
+                            <ul>
+                                <li>Distribusi geografis luas</li>
+                                <li>Populasi stabil atau meningkat</li>
+                                <li>Tidak ada ancaman signifikan yang diketahui</li>
+                                <li>Umum ditemukan di habitat aslinya</li>
+                            </ul>
+                        </div>
+                        <div class="status-reference">
+                            <p><strong>Sumber:</strong> IUCN Red List of Threatened Species. Versi 2023-1.</p>
+                            <p><strong>Tanggal Penilaian:</strong> 12 Juni 2018</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="iucn-categories">
+                    <h4>Kategori Status Konservasi IUCN:</h4>
+                    <div class="categories-grid">
+                        <div class="category-item ex">
+                            <div class="category-color"></div>
+                            <div class="category-info">
+                                <div class="category-name">Extinct (EX)</div>
+                                <div class="category-desc">Punah</div>
+                            </div>
+                        </div>
+                        <div class="category-item ew">
+                            <div class="category-color"></div>
+                            <div class="category-info">
+                                <div class="category-name">Extinct in the Wild (EW)</div>
+                                <div class="category-desc">Punah di Alam Liar</div>
+                            </div>
+                        </div>
+                        <div class="category-item cr">
+                            <div class="category-color"></div>
+                            <div class="category-info">
+                                <div class="category-name">Critically Endangered (CR)</div>
+                                <div class="category-desc">Kritis</div>
+                            </div>
+                        </div>
+                        <div class="category-item en">
+                            <div class="category-color"></div>
+                            <div class="category-info">
+                                <div class="category-name">Endangered (EN)</div>
+                                <div class="category-desc">Terancam Punah</div>
+                            </div>
+                        </div>
+                        <div class="category-item vu">
+                            <div class="category-color"></div>
+                            <div class="category-info">
+                                <div class="category-name">Vulnerable (VU)</div>
+                                <div class="category-desc">Rentan</div>
+                            </div>
+                        </div>
+                        <div class="category-item nt">
+                            <div class="category-color"></div>
+                            <div class="category-info">
+                                <div class="category-name">Near Threatened (NT)</div>
+                                <div class="category-desc">Hampir Terancam</div>
+                            </div>
+                        </div>
+                        <div class="category-item lc active">
+                            <div class="category-color"></div>
+                            <div class="category-info">
+                                <div class="category-name">Least Concern (LC)</div>
+                                <div class="category-desc">Risiko Rendah</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1609,7 +1857,7 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
+ <!-- Gallery Section -->
     <section id="gallery" class="container">
         <div class="section-title">
             <h2>Galeri</h2>
